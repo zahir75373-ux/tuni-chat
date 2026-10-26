@@ -1,11 +1,3 @@
-{
-  "name": "টুনি-চ্যাট",
-  "short_name": "টুনি-চ্যাট",
-  "lang": "bn",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#fff6e0",
-  "theme_color": "#ffb703",
-  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
-}
+{ "name": "Tuni Chat", "short_name": "TuniChat", "start_url": "./index.html", "display": "fullscreen",
+  "orientation": "portrait", "background_color": "#fff6e0", "theme_color": "#ffb703",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }] }

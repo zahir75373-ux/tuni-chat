@@ -1,5 +1,5 @@
 /* Tuni-Chat service worker: cache the app shell; big voice/vision files go to a separate, never-deleted cache. */
-var CACHE = 'tuni-chat-v2';
+var CACHE = 'tuni-chat-v3';
 var MODEL_CACHE = 'tuni-chat-model-v1';
 var SHELL = ['./', 'index.html', 'app.css', 'app.js', 'store.js', 'content.js', 'safety.js', 'emotion.js', 'brain.js', 'tts.js', 'tts-worker.js', 'stt.js', 'face.js', 'cartoons.js', 'puppet.js',
   'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'pack.json', 'model/bn.onnx.json'];
