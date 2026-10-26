@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#ffb703">
+<meta name="mobile-web-app-capable" content="yes">
+<title>টুনি-চ্যাট</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- হোম: বন্ধুদের তালিকা -->
+  <section id="home" class="screen">
+    <header class="bar">
+      <h1>🌈 আমার বন্ধুরা</h1>
+      <button id="btnSettings" class="icon-btn" aria-label="অভিভাবকের সেটিং">⚙️</button>
+    </header>
+    <div id="banners"></div>
+    <div id="grid"></div>
+  </section>
+
+  <!-- চ্যাট -->
+  <section id="chat" class="screen" hidden>
+    <canvas id="cv"></canvas>
+    <div id="dim"></div>
+    <div class="top">
+      <button id="btnBack" class="round" aria-label="পেছনে">←</button>
+      <div id="chatName" class="pill"></div>
+      <button id="btnEdit" class="round small" aria-label="বন্ধুকে বদলাও">✏️</button>
+    </div>
+    <div id="parentNote" hidden></div>
+    <div class="bottom">
+      <div id="caption"></div>
+      <div id="status" class="pill status">ধরে রেখে বলো 🎤</div>
+      <div id="quick">
+        <button class="chip" data-q="story">📖 গল্প</button>
+        <button class="chip" data-q="riddle">🧩 ধাঁধা</button>
+        <button class="chip" data-q="rhyme">🎵 ছড়া</button>
+        <button class="chip" data-q="song">🎶 গান</button>
+        <button class="chip" id="btnBed">🌙 ঘুম</button>
+      </div>
+      <div id="textrow" hidden>
+        <input id="txt" type="text" placeholder="এখানে লেখো…" autocomplete="off" enterkeyhint="send">
+        <button id="btnSend" class="round small" aria-label="পাঠাও">➤</button>
+      </div>
+      <div class="controls">
+        <button id="btnKbd" class="round" aria-label="লেখার ঘর">⌨️</button>
+        <button id="btnMic" aria-label="ধরে রেখে বলো">🎤</button>
+        <button id="btnStop" class="round" aria-label="থামো">⏹</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- বন্ধু বানাও / বদলাও -->
+  <section id="editor" class="screen scroll" hidden>
+    <header class="bar">
+      <button id="edBack" class="round small" aria-label="পেছনে">←</button>
+      <h1 id="edTitle">নতুন বন্ধু</h1>
+    </header>
+    <div class="col">
+      <div id="edStage"><canvas id="edCv"></canvas></div>
+      <div id="edMsg" class="note"></div>
+      <div class="row3">
+        <button class="big" id="edCam">📷 ছবি তোলো</button>
+        <button class="big" id="edGal">🖼️ গ্যালারি</button>
+        <button class="big" id="edToon">🧸 কার্টুন</button>
+      </div>
+      <input id="fileCam" type="file" accept="image/*" capture="user" hidden>
+      <input id="fileGal" type="file" accept="image/*" hidden>
+      <div id="edToons" class="chips" hidden></div>
+
+      <h2>👄 মুখ</h2>
+      <p class="note">ছবির ওপর আঙুল ছুঁয়ে বা টেনে মুখের জায়গা দেখান (লাল দাগ)।</p>
+      <div class="row2"><button class="big alt" id="edAuto">🔍 নিজে খুঁজুক</button><button class="big alt" id="edTest">▶ চেষ্টা করো</button></div>
+      <label class="lab">মুখের মাপ <input id="edW" type="range" min="4" max="50" value="20"></label>
+      <label class="lab">থুতনি/চোয়াল <input id="edJ" type="range" min="3" max="30" value="12"></label>
+
+      <h2>নাম</h2>
+      <input id="edName" type="text" maxlength="20" placeholder="বন্ধুর নাম" autocomplete="off">
+
+      <h2>🗣️ কণ্ঠ</h2>
+      <div id="edVoices" class="voices"></div>
+      <div id="edPackNote" class="note" hidden></div>
+      <h3>কণ্ঠের মজা</h3>
+      <div id="edFx" class="chips"></div>
+
+      <h2>💃 নাড়ানোর ভঙ্গি</h2>
+      <div id="edMotions" class="chips"></div>
+
+      <button class="big ok" id="edSave">💾 সেভ করো</button>
+      <button class="big danger" id="edDel" hidden>🗑️ এই বন্ধুকে মুছে ফেলো</button>
+      <div class="spacer"></div>
+    </div>
+  </section>
+
+  <!-- অভিভাবকের সেটিং -->
+  <section id="settings" class="screen scroll" hidden>
+    <header class="bar">
+      <button id="stBack" class="round small" aria-label="পেছনে">←</button>
+      <h1>⚙️ অভিভাবকের জন্য</h1>
+    </header>
+    <div class="col">
+      <h2>🔑 Gemini API চাবি</h2>
+      <p class="note">aistudio.google.com থেকে বিনামূল্যে চাবি নিন। এটা শুধু এই ফোনেই থাকে।</p>
+      <div class="rowkey"><input id="stKey" type="password" placeholder="AIza…" autocomplete="off" spellcheck="false"><button class="round small" id="stShow" aria-label="দেখাও">👁</button></div>
+      <label class="lab">মডেলের নাম <input id="stModel" type="text" autocomplete="off" spellcheck="false"></label>
+      <div class="row2"><button class="big alt" id="stTest">চাবি পরীক্ষা</button><button class="big ok" id="stSave">সেভ</button></div>
+      <div id="stResult" class="note"></div>
+
+      <h2>🛡️ নিরাপত্তা ও খেলা</h2>
+      <label class="check"><input type="checkbox" id="stSafety"> নিরাপত্তা ফিল্টার চালু (ভয়ের/বড়দের শব্দ আটকাবে)</label>
+      <label class="check"><input type="checkbox" id="stReact"> ছবিতে টোকা দিলে মজার প্রতিক্রিয়া</label>
+      <label class="lab">বকা খেলে বন্ধুর প্রতিক্রিয়া
+        <select id="stEmo"><option value="full">রাগ-অভিমান ও মন খারাপ (পুরো)</option><option value="sulk">শুধু একটু অভিমান</option><option value="none">রাগ বন্ধ (শুধু মন খারাপ)</option></select></label>
+      <label class="lab">কথা বলার গতি
+        <select id="stRate"><option value="0.9">দ্রুত</option><option value="1">স্বাভাবিক</option><option value="1.2">ধীরে</option></select></label>
+      <label class="lab">দিনে খেলার সীমা
+        <select id="stLimit"><option value="0">সীমা নেই</option><option value="15">১৫ মিনিট</option><option value="30">৩০ মিনিট</option><option value="45">৪৫ মিনিট</option><option value="60">১ ঘণ্টা</option></select></label>
+      <div id="stUsed" class="note"></div>
+
+      <h2>🔊 ভয়েস (অফলাইন প্যাক)</h2>
+      <div id="stPack" class="note"></div>
+      <button class="big alt" id="stDl">⬇️ ভয়েস ডাউনলোড</button>
+
+      <h2>🧸 বন্ধুরা</h2>
+      <div id="stChars"></div>
+      <button class="big alt" id="stClearAll">🧹 সব কথার ইতিহাস মুছুন</button>
+
+      <h2>ℹ️ কিছু কথা</h2>
+      <p class="note">ফ্রি Gemini-তে কথোপকথন গুগল তাদের পণ্য ভালো করতে ব্যবহার করতে পারে। বাচ্চাকে একা ছেড়ে দেবেন না, পাশে থাকুন। চ্যাটের জন্য ইন্টারনেট লাগে।</p>
+      <p class="note">ভয়েস: Piper bn_BD (google, medium) — ডেটা OpenSLR-37 (CC BY-SA 4.0) ও CMU। espeak-ng (GPL-3.0) ও onnxruntime-web (MIT), MediaPipe (Apache-2.0) ব্যবহার হয়েছে। বিস্তারিত THIRD_PARTY.md ফাইলে।</p>
+      <div class="spacer"></div>
+    </div>
+  </section>
+
+  <div id="overlay" hidden><div id="ovCard"></div></div>
+  <div id="toast" hidden></div>
+</div>
+
+<script src="store.js"></script>
+<script src="content.js"></script>
+<script src="safety.js"></script>
+<script src="emotion.js"></script>
+<script src="brain.js"></script>
+<script src="tts.js"></script>
+<script src="stt.js"></script>
+<script src="face.js"></script>
+<script src="cartoons.js"></script>
+<script src="puppet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

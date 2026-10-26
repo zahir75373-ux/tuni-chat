@@ -1,0 +1,61 @@
+{
+ "total": 110689908,
+ "files": [
+  {
+   "url": "vendor/ort/ort-wasm-simd-threaded.mjs",
+   "size": 24381
+  },
+  {
+   "url": "vendor/ort/ort-wasm-simd-threaded.wasm",
+   "size": 14239897
+  },
+  {
+   "url": "vendor/ort/ort.wasm.min.js",
+   "size": 50196
+  },
+  {
+   "url": "vendor/piper/piper_phonemize.data",
+   "size": 1076679
+  },
+  {
+   "url": "vendor/piper/piper_phonemize.js",
+   "size": 112243
+  },
+  {
+   "url": "vendor/piper/piper_phonemize.wasm",
+   "size": 635212
+  },
+  {
+   "url": "model/bn.onnx.part0",
+   "size": 20000000
+  },
+  {
+   "url": "model/bn.onnx.part1",
+   "size": 20000000
+  },
+  {
+   "url": "model/bn.onnx.part2",
+   "size": 20000000
+  },
+  {
+   "url": "model/bn.onnx.part3",
+   "size": 16782515
+  },
+  {
+   "url": "vendor/mediapipe/face_landmarker.task",
+   "size": 3758596
+  },
+  {
+   "url": "vendor/mediapipe/vision_bundle.mjs",
+   "size": 156139
+  },
+  {
+   "url": "vendor/mediapipe/wasm/vision_wasm_internal.js",
+   "size": 334128
+  },
+  {
+   "url": "vendor/mediapipe/wasm/vision_wasm_internal.wasm",
+   "size": 13519922
+  }
+ ]
+}
